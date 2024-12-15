@@ -1,14 +1,19 @@
-import { useState } from 'react'
-import ProductList from '../Components/ProductList'
+import React from 'react'
+import Navbar from '../Components/Navbar'
+import { useNavigate } from 'react-router-dom'
+import BalanceCard from '../Components/BalanceCard'
+import BottomNav from '../Components/BottomNav'
 
-const Home = () => {
-  const [cart, setCart] = useState([])
-  const addToCart = (product)=>{
-    setCart([...cart, product])
-  }
+const Home = ({handleLogout}) => {
+  const navigate = useNavigate()
   return (
-    <div>
-      <ProductList addToCart={addToCart}/>
+    <div className='p-4 w-full max-w-md mx-auto'>
+      <div>
+        <Navbar />
+        <BalanceCard handleLogout={handleLogout}/>
+        {/* <BottomNav handleLogout={handleLogout}/> */}
+      </div>
+    
     </div>
   )
 }

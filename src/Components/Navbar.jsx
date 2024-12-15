@@ -1,71 +1,53 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import profileImage from "../Images/member-2.png";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose, faHouse } from "@fortawesome/free-solid-svg-icons";
-import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
 
-const Navbar = () => {
-  const [showMobile, setShowMobile] = useState(false);
+const Navbar = ({ handleLogout }) => {
+  const [notificationCount, setNotificationCount] = useState(0);
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && Array.isArray(currentUser.notifications)) {
+      setNotificationCount(currentUser.notifications.length);
+    }
+  }, []);
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && currentUser.name) {
+      setUserName(currentUser.name);
+    }
+  }, []);
+  const handleLogoutClick = () => {
+    handleLogout();
+    navigate("/login");
+  };
   return (
-    <>
-      <div className="flex justify-between p-4 md:px-20 bg-white shadow-md w-full items-center z-10 top-0 fixed ">
-        <Link to='/'>
-          <h1 className="text-2xl font-bold text-blue-900 md:text-3xl">
-            Best{" "}
-            <span className="underline underline-offset-1 font-thin text-orange-600">
-              Buy.
+    <div className="mb-7">
+      <div className="flex justify-between items-center">
+        <div className="flex gap-2 items-center cursor-pointer">
+          <img src={profileImage} className="rounded-full w-10 h-10" />
+          <p className="text-[14px] font-medium">
+            Hi, {userName.toLocaleUpperCase()}
+          </p>
+        </div>
+        
+        
+        <Link to={"/notification"} className="relative">
+          <FontAwesomeIcon icon={faBell} className="text-2xl cursor-pointer" />
+          {notificationCount > 0 && (
+            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+              {notificationCount}
             </span>
-          </h1>
-        </Link>
-        <div className="hidden md:flex gap-8 items-center">
-          <Link to="/" className="text-[18px] text-gray-600">
-            Home
-          </Link>
-          <Link to="/cart" className="text-[18px] text-gray-600">
-            Cart
-          </Link>
-          <Link to="/watchList" className="text-[18px] text-gray-600">
-            Watchlist
-          </Link>
-        </div>
-
-        {/* mobile menu icon control */}
-        <div className="flex gap-10 md:hidden ">
-          <Link to="/cart">
-            <FontAwesomeIcon icon={faBagShopping} className="text-[18px]" />
-          </Link>
-
-          {showMobile ? (
-            <FontAwesomeIcon
-              icon={faClose}
-              onClick={() => setShowMobile(!showMobile)}
-              className="text-[20px]"
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon={faBars}
-              onClick={() => setShowMobile(!showMobile)}
-              className="text-[20px]"
-            />
           )}
-        </div>
+        </Link>
       </div>
-      <div
-        className={`${
-          showMobile ? "block" : "hidden"
-        } block top-0 md:hidden bg-blue-600 w-full transition-all mt-16 mb-0`}
-      >
-        <div className="flex flex-col gap-5 text-center py-5 text-white">
-          <Link to="/" className=" " onClick={()=>setShowMobile(false)}>
-            <p>Home</p>
-          </Link>
-          <Link to="/watchList" className=" " onClick={()=>setShowMobile(false)}>
-            <p>WatchList</p>
-          </Link>
-        </div>
-      </div>
-    </>
+      {/* <button className='px-3 py-1 border-blue-600 border-2 rounded text-blue-600 font-medium' onClick={handleLogoutClick}>Logout</button> */}
+    </div>
   );
 };
 
