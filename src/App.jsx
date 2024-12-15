@@ -103,7 +103,7 @@ function App() {
             }
           />
           <Route path="/login" element={<Login handleLogin={handleLogin}/>} />
-          <Route path="/" element={<Signup handleSignup={handleSignup}/>} />
+          <Route path="/signup" element={<Signup handleSignup={handleSignup}/>} />
           <Route path="/home" element={<Home user={currentUser} handleLogout={handleLogout}/>} />
           <Route path="/transactions" element={<AllTransactionPage/>}/>
           <Route path="/transaction/:id" element={<TransactionDetails/>}/>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProfileImage from "../Images/member-2.png";
+// import ProfileImage from "../Images/member-2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
@@ -22,15 +22,11 @@ const Navbar = ({ handleLogout }) => {
       setUserName(currentUser.name);
     }
   }, []);
-  const handleLogoutClick = () => {
-    handleLogout();
-    navigate("/login");
-  };
   return (
     <div className="mb-7">
       <div className="flex justify-between items-center">
         <div className="flex gap-2 items-center cursor-pointer">
-          <img src={ProfileImage} className="rounded-full w-10 h-10" />
+          <img src="/Images/member-2.png" className="rounded-full w-10 h-10" />
           <p className="text-[14px] font-medium">
             Hi, {userName.toLocaleUpperCase()}
           </p>
