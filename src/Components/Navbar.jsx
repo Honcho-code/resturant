@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import profileImage from "../Images/member-2.png";
+import profileImage from "../Images/member-4.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
