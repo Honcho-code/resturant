@@ -82,10 +82,11 @@ function App() {
       return false;
     }
   };
-  const handleLogout = () => {
+  const handleLogout = (navigate) => {
     // setCurrentUser(null)
     localStorage.removeItem("currentUser")
-    // Navigate("/login")
+    // window.location.reload()
+    navigate("/login")
   };
   return (
     <div className="w-full overflow-hidden">

@@ -78,7 +78,7 @@ const TransactionDetails = () => {
       <div className="flex justify-between items-center mb-4">
         <FontAwesomeIcon
           icon={faArrowLeft}
-          onClick={() => navigate("/")}
+          onClick={() => navigate(-1)}
           className="p-2 bg-gray-300 text-gray-700 cursor-pointer rounded shadow-sm"
         />
         <p className="text-lg font-semibold">Transaction Details</p>

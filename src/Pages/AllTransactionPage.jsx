@@ -19,7 +19,7 @@ const AllTransactionPage = () => {
   return (
     <div className="p-4 w-full max-w-md mx-auto">
       <div className="flex mb-4 items-center justify-between fixed gap-5 bg-white">
-        <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate("/")} className="p-2 bg-gray-300 text-gray-700 cursor-pointer rounded shadow-sm"/>
+        <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate(-1)} className="p-2 bg-gray-300 text-gray-700 cursor-pointer rounded shadow-sm"/>
         <h1 className="text-lg font-semibold">All Transactions</h1>
       </div>
       {transactions.length > 0 ? (

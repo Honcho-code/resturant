@@ -25,7 +25,7 @@ const Notification = () => {
       <div className="flex mb-4 items-center justify-between fixed gap-5 bg-white">
         <FontAwesomeIcon
           icon={faArrowLeft}
-          onClick={() => navigate("/")}
+          onClick={() => navigate(-1)}
           className="p-2 bg-gray-300 text-gray-700 cursor-pointer rounded shadow-sm"
         />
         <h1 className="text-lg font-semibold">Notification</h1>
