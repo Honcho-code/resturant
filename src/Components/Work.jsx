@@ -35,7 +35,7 @@ const Work = () => {
           imgSrc: '/images/project-5.jpg',
           title: 'Portfolio website',
           tags: ['Web-design', 'Development'],
-          projectLink: 'https://github.com/codewithsadee/vcard-personal-portfolio',
+          projectLink: 'https://rapheal-clinton.vercel.app/',
           githubLink: 'https://github.com/Honcho-code/Spotify-clone'
         },
       ];
