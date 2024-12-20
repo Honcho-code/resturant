@@ -1,117 +1,52 @@
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Signup from "./Pages/Signup";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useState } from "react";
-import Navbar from "./Components/Navbar";
-import AllTransactionPage from "./Pages/AllTransactionPage";
-import TransactionDetails from "./Components/TransactionDetails";
-import Notification from "./Pages/Notification";
+import Header from "./Components/Header";
+import Hero from "./Components/Hero";
+import About from "./Components/About";
+import Skills from "./Components/Skills";
+import Work from './Components/Work'
+import Review from "./Components/Review";
+import Contact from "./Components/Contact";
+import Footer from "./Components/Footer";
+import { ReactLenis } from 'lenis/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 function App() {
-  const [users, setUsers] = useState(()=>{
-    try{
-      const savedUsers = localStorage.getItem("users")
-      return savedUsers ? JSON.parse(savedUsers) : []
-    }catch(error){
-      console.error("Error parsing users from localstorage", error)
-      return []
-    }
-  });
 
-  const [currentUser, setCurrentUser] = useState(() => {
-    try{
-      const savedUser = localStorage.getItem("currentUser");
-      return savedUser ? JSON.parse(savedUser) : null
-    }catch(error){
-      console.error("Error parsing currentUser from localstorage", error)
-      return null
-    }
-  });
+  useGSAP(()=>{
+    const elemets = gsap.utils.toArray('.reveal-up')
+    elemets.forEach((element)=>{
+      gsap.to(element, {
+        ScrollTrigger: {
+          trigger: element,
+          start: '-200 bottom',
+          end: 'bottom 80%',
+          scrub: true,
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power2.out'
+      })
+    })
+  })
 
-  // Save users to localStorage whenever the users array changes
-  useEffect(() => {
-    localStorage.setItem("users", JSON.stringify(users));
-  }, [users]);
-
-  // Save currentUser to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-  }, [currentUser]);
-
-
-  const handleSignup = (newUser) => {
-    if (users.some((user) => user.email === newUser.email)) {
-      alert("User with this email already exists!");
-      return false;
-    }
-
-    setUsers([...users, newUser]);
-    return true;
-  };
-
-  // const handleSignup = ({ name, email, password })=>{
-  //   const newUser = {name, email, password}
-
-  //   const existiingUsers = JSON.parse(localStorage.getItem("users")) || []
-  //   localStorage.setItem("users", JSON.stringify([...existiingUsers, newUser]))
-
-  //   localStorage.setItem("currentUser", JSON.stringify(newUser))
-
-  //   return true
-  // }
-  const handleLogin = ({email, password}) => {
-    const existiingUsers = JSON.parse(localStorage.getItem("users")) || []
-    const user = existiingUsers.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      // setCurrentUser(user);
-      return true;
-    } else {
-      // alert("Invalid email or password");
-      return false;
-    }
-  };
-  const handleLogout = (navigate) => {
-    // setCurrentUser(null)
-    localStorage.removeItem("currentUser")
-    // window.location.reload()
-    navigate("/login")
-  };
   return (
-    <div className="w-full overflow-hidden">
-      <Router>
-        <ToastContainer />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              currentUser ? (
-                <Home user={currentUser} handleLogout={handleLogout} />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-          <Route path="/login" element={<Login handleLogin={handleLogin}/>} />
-          <Route path="/signup" element={<Signup handleSignup={handleSignup}/>} />
-          <Route path="/home" element={<Home user={currentUser} handleLogout={handleLogout}/>} />
-          <Route path="/transactions" element={<AllTransactionPage/>}/>
-          <Route path="/transaction/:id" element={<TransactionDetails/>}/>
-          <Route path="/notification" element={<Notification/>}/>
-        </Routes>
-      </Router>
-    </div>
+    <ReactLenis root>
+      <Header/>
+      <main>
+        <Hero/>
+        <About/>
+        <Skills/>
+        <Work/>
+        <Review/>
+        <Contact/>
+      </main>
+      <Footer/>
+    </ReactLenis>
   );
 }
 

@@ -1,10 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import { AppProvider } from './Context/AppContext.jsx'
+import 'lenis/dist/lenis.css'
 
 createRoot(document.getElementById('root')).render(
-  <AppProvider>
+  <StrictMode>
     <App />
-  </AppProvider>,
+  </StrictMode>,
 )
