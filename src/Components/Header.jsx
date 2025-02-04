@@ -16,7 +16,7 @@ const Header = () => {
                     </button>
                     <Navbar navOpen={navOpen}/>
                 </div>
-                <a href="#contact" className="btn btn-secondary max-md:hidden md:justify-self-end">Contact Me</a>
+                <a href="#contact" className="btn btn-secondary max-md:hidden md:justify-self-end">Contact Us</a>
             </div>
         </header>
     );
