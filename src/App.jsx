@@ -5,8 +5,12 @@ import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from '@gsap/react'
 import Header from './Components/Header'
+import RandomMeals from "./Components/RandomMeals";
 import Hero from "./Components/Hero";
-import Work from "./Components/Work";
+import About from "./Components/About";
+import Review from "./Components/Review";
+
+// import Work from "./Components/Work";
 
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
@@ -18,7 +22,10 @@ function App() {
       <Header/>
       <main>
         <Hero/>
-        <Work/>
+        {/* <Work/> */}
+        <RandomMeals/>
+        <About/>
+        <Review/>
       </main>
     </ReactLenis>
   );
